@@ -1,16 +1,10 @@
 from flask import Flask,render_template,Response,jsonify
-import threading
-import cv2
 from keras.models import load_model
 import cv2
 import numpy as np
 import os
 from matplotlib import pyplot as plt
-import time
 import mediapipe as mp
-import mediapipe as mp
-from mediapipe.tasks import python
-from mediapipe.tasks.python import vision
 mp_holistic = mp.solutions.holistic # Holistic model
 mp_drawing = mp.solutions.drawing_utils # Drawing utilities
 app=Flask(__name__)
