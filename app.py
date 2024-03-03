@@ -160,3 +160,5 @@ def capture():
 @app.route('/get_prediction')
 def get_prediction():
     return jsonify({'predicted_action': predicted_actions})
+if __name__=="__main__":
+    app.run(debug=True)
