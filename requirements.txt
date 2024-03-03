@@ -1,0 +1,10 @@
+Flask
+Gunicorn
+cv2
+tensorflow
+cv2
+numpy
+os
+matplotlib
+time
+mediapipe 
