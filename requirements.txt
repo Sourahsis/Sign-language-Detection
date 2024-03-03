@@ -1,9 +1,5 @@
 Flask
 Gunicorn
-tensorflow
 opencv-python
-numpy
-os-command-py
-matplotlib
 mediapipe 
-tensorrt
+keras
