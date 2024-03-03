@@ -3,7 +3,6 @@ Gunicorn
 tensorflow
 opencv-python
 numpy
-os
+os-command-py
 matplotlib
-time
 mediapipe 
