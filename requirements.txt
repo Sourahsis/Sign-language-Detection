@@ -1,5 +1,5 @@
 Flask
 Gunicorn
-opencv-python
+opencv-python-headless==4.5.1.48
+tensorflow
 mediapipe 
-keras
