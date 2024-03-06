@@ -1,5 +1,7 @@
 Flask
 Gunicorn
+--upgrade pip
+--upgrade setuptools
 opencv-python-headless==4.5.1.48
 tensorflow
 imutils
