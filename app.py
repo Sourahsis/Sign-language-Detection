@@ -1,14 +1,13 @@
-from tensorflow.keras.models import load_model
+from flask import Flask,render_template,Response,jsonify
+from keras.models import load_model
 import cv2
 import numpy as np
-import os
-from matplotlib import pyplot as plt
 import mediapipe as mp
+from imutils.video import VideoStream
 mp_holistic = mp.solutions.holistic # Holistic model
 mp_drawing = mp.solutions.drawing_utils # Drawing utilities
 app=Flask(__name__)
 model = load_model('sign_language_prediction.h5')
-
 def mediapipe_detection(image, model):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) # COLOR CONVERSION BGR 2 RGB
     image.flags.writeable = False                  # Image is no longer writeable
@@ -80,12 +79,12 @@ def display_video():
     sentence = []
     predictions = []
     threshold = 0.5
-    cap = cv2.VideoCapture(0)
+    cap = VideoStream(src=0).start()
     # Set mediapipe model 
     with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-        while cap.isOpened():
+        while True:
             # Read feed
-            ret, frame = cap.read()
+            frame = cap.read()
 
             # Make detections
             image, results = mediapipe_detection(frame, holistic)
@@ -106,7 +105,7 @@ def display_video():
                 
                 
                 #3. Viz logic
-                if np.unique(predictions[-10:])[0]==np.argmax(res): 
+                if np.unique(predictions[-7:])[0]==np.argmax(res): 
                     if res[np.argmax(res)] > threshold: 
                         
                         if len(sentence) > 0: 
@@ -153,5 +152,6 @@ def capture():
 @app.route('/get_prediction')
 def get_prediction():
     return jsonify({'predicted_action': predicted_actions})
+
 if __name__=="__main__":
     app.run(debug=True)
